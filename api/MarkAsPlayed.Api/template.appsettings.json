@@ -1,0 +1,26 @@
+{
+  "ConnectionStrings": {
+    "MainDatabase": "Host=db;Database=markasplayed;Username=markasplayed;Password=markasplayed;"
+  },
+  "Cors": {
+    "ExposedHeaders": [ ]
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "System": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    },
+    "Console": {
+      "IncludeScopes": true
+    }
+  },
+  "FrontendUrl": "http://localhost:3000",
+  "AllowedHosts": "*",
+  "RootPath": "/app/MarkAsPlayed.Api",
+  "Firebase": {
+    "ProjectId": "", //needs to be supplemented
+    "TestUserId": ""
+  },
+  "TestingEnvironment": "false"
+}
