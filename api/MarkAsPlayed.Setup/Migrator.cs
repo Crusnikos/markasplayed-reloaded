@@ -39,7 +39,7 @@ internal sealed class Migrator
         }
         else
         {
-            ConsoleExtension.WriteLine("\u2716 Database could not be updated", ConsoleColor.Red);
+            ConsoleExtension.WriteLine("\u2716 Database could not be upgraded", ConsoleColor.Red);
             ConsoleExtension.WriteLine("Error:");
             ConsoleExtension.WriteLine(operation.Error.Message);
             ConsoleExtension.WriteLine("\n");

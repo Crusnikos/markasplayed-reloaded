@@ -1,6 +1,8 @@
-﻿namespace MarkAsPlayed.Setup;
+﻿using System.Drawing;
 
-internal class ConsoleExtension
+namespace MarkAsPlayed.Setup;
+
+internal static class ConsoleExtension
 {
     public static void WriteLine(String message)
     {
@@ -15,11 +17,20 @@ internal class ConsoleExtension
     public static void WriteLine(String message, ConsoleColor color, bool newLine = false)
     {
         var oldColor = Console.ForegroundColor;
-        Console.ForegroundColor = color;
+
         if (newLine)
-            Console.WriteLine($"-----\n{message}\n-----");
-        else
+        {
+            Console.WriteLine("--------");
+            Console.ForegroundColor = color;
             Console.WriteLine(message);
-        Console.ForegroundColor = oldColor;
+            Console.ForegroundColor = oldColor;
+            Console.WriteLine("--------");
+        }
+        else
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+            Console.ForegroundColor = oldColor;
+        }
     }
 }
