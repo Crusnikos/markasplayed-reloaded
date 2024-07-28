@@ -54,6 +54,7 @@ Process launching containers in terminal:
 1.docker compose build
 2.docker compose up -d
 3.docker compose exec api bash
+4.dotnet run --project MarkAsPlayed.Setup/MarkAsPlayed.Setup.csproj
 4.dotnet run --project MarkAsPlayed.Api/MarkAsPlayed.Api.csproj
 5.docker compose exec ui bash
 6.npm start
@@ -69,5 +70,6 @@ Process launching containers in terminal:
 1.docker compose build
 2.docker compose up -d
 3.docker compose exec api bash
+4.dotnet run --project MarkAsPlayed.Setup/MarkAsPlayed.Setup.csproj
 4.dotnet test MarkAsPlayed.sln
 ```

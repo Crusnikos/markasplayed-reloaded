@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS builder
+RUN dotnet dev-certs https
 WORKDIR /app
 
 COPY *.sln .

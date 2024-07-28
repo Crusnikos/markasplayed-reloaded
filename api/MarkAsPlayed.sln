@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkAsPlayed.Api", "MarkAsPlayed.Api\MarkAsPlayed.Api.csproj", "{57D3B510-D7F6-4DC7-94B8-DA1BFE71F1FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{721EF7E6-AFC7-445B-8DF1-F7AC988F8E4E} = {721EF7E6-AFC7-445B-8DF1-F7AC988F8E4E}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkAsPlayed.Api.Tests", "MarkAsPlayed.Api.Tests\MarkAsPlayed.Api.Tests.csproj", "{4320A4BB-8E47-4373-B0C7-87E0AF4BD188}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkAsPlayed.Api.Tests", "MarkAsPlayed.Api.Tests\MarkAsPlayed.Api.Tests.csproj", "{4320A4BB-8E47-4373-B0C7-87E0AF4BD188}"
+	ProjectSection(ProjectDependencies) = postProject
+		{57D3B510-D7F6-4DC7-94B8-DA1BFE71F1FF} = {57D3B510-D7F6-4DC7-94B8-DA1BFE71F1FF}
+		{721EF7E6-AFC7-445B-8DF1-F7AC988F8E4E} = {721EF7E6-AFC7-445B-8DF1-F7AC988F8E4E}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkAsPlayed.Setup", "MarkAsPlayed.Setup\MarkAsPlayed.Setup.csproj", "{721EF7E6-AFC7-445B-8DF1-F7AC988F8E4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarkAsPlayed.Setup", "MarkAsPlayed.Setup\MarkAsPlayed.Setup.csproj", "{721EF7E6-AFC7-445B-8DF1-F7AC988F8E4E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7E838D45-3467-40E7-AF6B-F5E798641F19}"
 	ProjectSection(SolutionItems) = preProject
