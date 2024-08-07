@@ -22,7 +22,7 @@ internal sealed class Migrator
 
         if (!engine.IsUpgradeRequired())
         {
-            ConsoleExtension.WriteLine("\u2713 Database upgrade is not required", ConsoleColor.Green);
+            ConsoleExtension.WriteLine("- Database upgrade is not required");
             return Task.FromResult(new List<string>());
         }
 

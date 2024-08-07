@@ -16,12 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="migrations\1722171605_setup.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="dbup-postgresql" Version="5.0.40" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	<PackageReference Include="dbup-postgresql" Version="5.0.40" />
+	<PackageReference Include="linq2db" Version="5.4.1" />
+	<PackageReference Include="Npgsql" Version="8.0.3" />
+	<ProjectReference Include="..\MarkAsPlayed.Foundation\MarkAsPlayed.Foundation.csproj" />
   </ItemGroup>
 
 </Project>

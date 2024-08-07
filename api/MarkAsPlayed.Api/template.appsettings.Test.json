@@ -3,7 +3,7 @@
     "MainDatabase": "Host=db;Database=markasplayed;Username=markasplayed;Password=markasplayed;Pooling=false"
   },
   "Cors": {
-    "ExposedHeaders": [ ]
+    "ExposedHeaders": []
   },
   "Logging": {
     "LogLevel": {
@@ -21,5 +21,14 @@
     "ProjectId": "test",
     "TestUserId": "unique1"
   },
-  "TestingEnvironment": "true"
+  "TestingEnvironment": true,
+  "AdministrationUsers": [
+    {
+      "FirebaseId": "unique1",
+      "Name": "John Doe",
+      "DescriptionPl": "Polish Lorem ipsum",
+      "DescriptionEn": "English Lorem ipsum"
+    }
+  ],
+  "DefaultPageSize": 10
 }

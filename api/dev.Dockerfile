@@ -3,6 +3,7 @@ RUN dotnet dev-certs https
 WORKDIR /app
 
 COPY *.sln .
+COPY MarkAsPlayed.Foundation/*.csproj MarkAsPlayed.Foundation/
 COPY MarkAsPlayed.Setup/*.csproj MarkAsPlayed.Setup/
 COPY MarkAsPlayed.Api/*.csproj MarkAsPlayed.Api/
 COPY MarkAsPlayed.Api.Tests/*.csproj MarkAsPlayed.Api.Tests/
