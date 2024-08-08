@@ -1,0 +1,178 @@
+[
+  {
+    "name": "boardGame",
+    "group_sign": "E"
+  },
+  {
+    "name": "event",
+    "group_sign": "E"
+  },
+  {
+    "name": "game",
+    "group_sign": "E"
+  },
+  {
+    "name": "movie",
+    "group_sign": "E"
+  },
+  {
+    "name": "series",
+    "group_sign": "E"
+  },
+  {
+    "name": "story",
+    "group_sign": "E"
+  },
+  {
+    "name": "action",
+    "group_sign": "T"
+  },
+  {
+    "name": "adventure",
+    "group_sign": "T"
+  },
+  {
+    "name": "puzzle",
+    "group_sign": "T"
+  },
+  {
+    "name": "rolePlaying",
+    "group_sign": "T"
+  },
+  {
+    "name": "simulation",
+    "group_sign": "T"
+  },
+  {
+    "name": "strategy",
+    "group_sign": "T"
+  },
+  {
+    "name": "sports",
+    "group_sign": "T"
+  },
+  {
+    "name": "sandbox",
+    "group_sign": "T"
+  },
+  {
+    "name": "shooter",
+    "group_sign": "T"
+  },
+  {
+    "name": "cardGame",
+    "group_sign": "T"
+  },
+  {
+    "name": "diceGame",
+    "group_sign": "T"
+  },
+  {
+    "name": "anime",
+    "group_sign": "G"
+  },
+  {
+    "name": "comedy",
+    "group_sign": "G"
+  },
+  {
+    "name": "fantasy",
+    "group_sign": "G"
+  },
+  {
+    "name": "horror",
+    "group_sign": "G"
+  },
+  {
+    "name": "scienceFiction",
+    "group_sign": "G"
+  },
+  {
+    "name": "thriller",
+    "group_sign": "G"
+  },
+  {
+    "name": "mystery",
+    "group_sign": "G"
+  },
+  {
+    "name": "romance",
+    "group_sign": "G"
+  },
+  {
+    "name": "western",
+    "group_sign": "G"
+  },
+  {
+    "name": "pegi3",
+    "group_sign": "P"
+  },
+  {
+    "name": "pegi7",
+    "group_sign": "P"
+  },
+  {
+    "name": "pegi12",
+    "group_sign": "P"
+  },
+  {
+    "name": "pegi16",
+    "group_sign": "P"
+  },
+  {
+    "name": "pegi18",
+    "group_sign": "P"
+  },
+  {
+    "name": "violence",
+    "group_sign": "P"
+  },
+  {
+    "name": "badLanguage",
+    "group_sign": "P"
+  },
+  {
+    "name": "fear",
+    "group_sign": "P"
+  },
+  {
+    "name": "gambling",
+    "group_sign": "P"
+  },
+  {
+    "name": "sex",
+    "group_sign": "P"
+  },
+  {
+    "name": "drugs",
+    "group_sign": "P"
+  },
+  {
+    "name": "discrimination",
+    "group_sign": "P"
+  },
+  {
+    "name": "inGamePurchases",
+    "group_sign": "P"
+  },
+  {
+    "name": "singlePlayer",
+    "group_sign": "M"
+  },
+  {
+    "name": "multiPlayer",
+    "group_sign": "M"
+  },
+  {
+    "name": "cooperative",
+    "group_sign": "M"
+  },
+  {
+    "name": "competitive",
+    "group_sign": "M"
+  },
+  {
+    "name": "mmo",
+    "group_sign": "M"
+  }
+]

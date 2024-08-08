@@ -33,7 +33,7 @@ internal sealed class Migrator
 
         if (operation.Successful)
         {
-            ConsoleExtension.WriteLine("\u2714 Database successfully upgraded", ConsoleColor.Green);
+            ConsoleExtension.WriteLine("- Database successfully upgraded");
 
             return Task.FromResult(executedScripts);
         }

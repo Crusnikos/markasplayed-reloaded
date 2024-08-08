@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MarkAsPlayed.Foundation;
+﻿namespace MarkAsPlayed.Foundation;
 
 public class Configuration
 {

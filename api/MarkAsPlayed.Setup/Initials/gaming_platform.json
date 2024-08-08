@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Nintendo Switch (Switch)",
+    "group_sign": "S"
+  },
+  {
+    "name": "Computer (PC)",
+    "group_sign": "C"
+  },
+  {
+    "name": "Nintendo Game Boy (GameBoy)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Nintendo 3DS (3DS)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Nintendo 2DS (2DS)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Nintendo 64 (N64)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Nintendo DS (DS)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Nintendo GameCube (GameCube)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Sony Playstation (PSX)",
+    "group_sign": "P"
+  },
+  {
+    "name": "Sony Playstation 2 (PS2)",
+    "group_sign": "P"
+  },
+  {
+    "name": "Sony Playstation 3 (PS3)",
+    "group_sign": "P"
+  },
+  {
+    "name": "Sony Playstation 4 (PS4)",
+    "group_sign": "P"
+  },
+  {
+    "name": "Sony Playstation 5 (PS5)",
+    "group_sign": "P"
+  },
+  {
+    "name": "Sony Playstation PSP (PSP)",
+    "group_sign": "P"
+  },
+  {
+    "name": "Sony Playstation Vita (PSVita)",
+    "group_sign": "P"
+  },
+  {
+    "name": "Super Nintendo Entertainment System (SNES)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Nintendo Wii (Wii)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Nintendo WiiU (WiiU)",
+    "group_sign": "N"
+  },
+  {
+    "name": "Microsoft Xbox Classic (Xbox Classic)",
+    "group_sign": "X"
+  },
+  {
+    "name": "Microsoft Xbox 360 (Xbox 360)",
+    "group_sign": "X"
+  },
+  {
+    "name": "Microsoft Xbox One (XOne)",
+    "group_sign": "X"
+  },
+  {
+    "name": "Microsoft Xbox Series X and S (Xbox X&S)",
+    "group_sign": "X"
+  },
+  {
+    "name": "Other",
+    "group_sign": "O"
+  }
+]

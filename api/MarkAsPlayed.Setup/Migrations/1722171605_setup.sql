@@ -88,3 +88,12 @@ CREATE TABLE article_tag (
 
 CREATE INDEX tag_id_idx ON tag (tag_id);
 CREATE INDEX article_tag_tag_id_idx ON article_tag (tag_id);
+
+--ARTICLE HISTORY SECTION
+CREATE TABLE article_version_history (
+    article_id BIGINT not null REFERENCES article (article_id) ON DELETE CASCADE,
+    transaction_id TEXT not null UNIQUE,
+    created_at timestamptz not null DEFAULT NOW(),
+    created_by_author_id INTEGER not null REFERENCES author (author_id),
+    differences JSONB not null
+);

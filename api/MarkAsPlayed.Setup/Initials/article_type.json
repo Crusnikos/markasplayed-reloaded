@@ -1,0 +1,22 @@
+[
+  {
+    "name": "review",
+    "group_sign": "R"
+  },
+  {
+    "name": "news",
+    "group_sign": "N"
+  },
+  {
+    "name": "story",
+    "group_sign": "S"
+  },
+  {
+    "name": "played",
+    "group_sign": "P"
+  },
+  {
+    "name": "other",
+    "group_sign": "O"
+  }
+]
