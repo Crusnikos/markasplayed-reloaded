@@ -1,5 +1,6 @@
 ﻿using LinqToDB.Data;
 using MarkAsPlayed.Foundation;
+using MarkAsPlayed.Foundation.Configuration;
 using Npgsql;
 using System.Text.Json;
 
@@ -92,7 +93,7 @@ internal sealed class Initializer
 
         var fileText = File.ReadAllText(initial);
         if (fileText == null)
-            throw new ArgumentNullException($"\u2716 Missing text in {initial}");
+            throw new ArgumentNullException($"Missing text in {initial}");
 
         var initialRecords = JsonSerializer.Deserialize<List<InitialRecord>>(fileText);
 

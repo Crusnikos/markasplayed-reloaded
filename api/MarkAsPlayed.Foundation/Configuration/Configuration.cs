@@ -1,11 +1,29 @@
-﻿namespace MarkAsPlayed.Foundation;
+﻿using System.Text.Json.Serialization;
+
+namespace MarkAsPlayed.Foundation.Configuration;
 
 public class Configuration
 {
+    [JsonConstructor]
+    public Configuration(ConnectionStrings connectionStrings, Cors cors, Logging logging,
+        string frontendUrl, string allowedHosts, string rootPath,
+        Firebase firebase, bool testingEnvironment, ICollection<AdministrationUsers> administrationUsers, int defaultPageSize)
+    {
+        ConnectionStrings = connectionStrings;
+        Cors = cors;
+        Logging = logging;
+        FrontendUrl = frontendUrl;
+        AllowedHosts = allowedHosts;
+        RootPath = rootPath;
+        Firebase = firebase;
+        TestingEnvironment = testingEnvironment;
+        AdministrationUsers = administrationUsers;
+        DefaultPageSize = defaultPageSize;
+    }
+
     public ConnectionStrings ConnectionStrings { get; set; } = default!;
     public Cors Cors { get; set; } = default!;
     public Logging Logging { get; set; } = default!;
-    public Console Console { get; set; } = default!;
     public string FrontendUrl { get; set; } = default!;
     public string AllowedHosts { get; set; } = default!;
     public string RootPath { get; set; } = default!;
@@ -37,6 +55,7 @@ public class Console
 public class Logging
 {
     public LogLevel LogLevel { get; set; } = default!;
+    public Console Console { get; set; } = default!;
 }
 
 public class LogLevel

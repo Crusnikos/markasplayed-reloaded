@@ -1,18 +1,16 @@
-﻿using MarkAsPlayed.Foundation;
+﻿using MarkAsPlayed.Foundation.Configuration;
 using MarkAsPlayed.Setup;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 ConsoleExtension.WriteLine("Starting the setup", ConsoleColor.Green, true);
 
 #region Read configuration
 ConsoleExtension.WriteLine("- Read configuration");
 
-var currentDirectory = Directory.GetCurrentDirectory();
-var configString = File.ReadAllText($"{currentDirectory}/MarkAsPlayed.Api/appsettings.json");
-if (configString == null)
-    throw new ArgumentNullException("\u2716 Missing configuration file");
+var configurationFilePath = $"{Directory.GetCurrentDirectory()}/MarkAsPlayed.Api/appsettings.json";
 
-var config = JsonSerializer.Deserialize<Configuration>(configString);
+var configString = await new Validation().GetConfigurationString(configurationFilePath);
+var config = JsonConvert.DeserializeObject<Configuration>(configString);
 
 ConsoleExtension.WriteLine("\u2714 Configuration resolved\n", ConsoleColor.Green);
 #endregion
@@ -21,16 +19,16 @@ ConsoleExtension.WriteLine("\u2714 Configuration resolved\n", ConsoleColor.Green
 ConsoleExtension.WriteLine("- Checking database connection string");
 var dbConnection = config?.ConnectionStrings?.MainDatabase;
 if (dbConnection == null)
-    throw new ArgumentNullException("\u2716 Missing database connection string");
+    throw new ArgumentNullException("Missing database connection string");
 
 ConsoleExtension.WriteLine("- Checking administration users data");
 var administrationUsers = config?.AdministrationUsers;
 if (administrationUsers == null || administrationUsers.Count == 0)
-    throw new ArgumentNullException("\u2716 Missing administration users data");
+    throw new ArgumentNullException("Missing administration users data");
 
 ConsoleExtension.WriteLine("- Checking firebase project id");
 if (config?.Firebase?.ProjectId == null)
-    throw new ArgumentNullException("\u2716 Missing firebase project id");
+    throw new ArgumentNullException("Missing firebase project id");
 
 ConsoleExtension.WriteLine("\u2714 Checking configuration data completed\n", ConsoleColor.Green);
 #endregion
