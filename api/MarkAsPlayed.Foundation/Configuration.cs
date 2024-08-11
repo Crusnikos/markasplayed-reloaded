@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
-namespace MarkAsPlayed.Foundation.Configuration;
+namespace MarkAsPlayed.Foundation;
 
 public class Configuration
 {
@@ -29,7 +29,7 @@ public class Configuration
     public string RootPath { get; set; } = default!;
     public Firebase Firebase { get; set; } = default!;
     public bool TestingEnvironment { get; set; }
-    public ICollection<AdministrationUsers> AdministrationUsers { get; set; } = default!;
+    public ICollection<AdministrationUsers> AdministrationUsers { get; set; } = new List<AdministrationUsers>();
     public int DefaultPageSize { get; set; }
 }
 
@@ -67,7 +67,7 @@ public class LogLevel
 
 public class Cors
 {
-    public ICollection<string> ExposedHeaders { get; set; } = default!;
+    public ICollection<string> ExposedHeaders { get; set; } = new List<string>();
 }
 
 public class ConnectionStrings

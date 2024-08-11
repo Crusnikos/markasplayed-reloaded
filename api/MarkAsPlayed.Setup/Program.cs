@@ -1,4 +1,4 @@
-﻿using MarkAsPlayed.Foundation.Configuration;
+﻿using MarkAsPlayed.Foundation;
 using MarkAsPlayed.Setup;
 using Newtonsoft.Json;
 
@@ -9,7 +9,13 @@ ConsoleExtension.WriteLine("- Read configuration");
 
 var configurationFilePath = $"{Directory.GetCurrentDirectory()}/MarkAsPlayed.Api/appsettings.json";
 
-var configString = await new Validation().GetConfigurationString(configurationFilePath);
+if (!File.Exists(configurationFilePath))
+    throw new FileNotFoundException($"{configurationFilePath} file not found");
+
+var configString = await File.ReadAllTextAsync(configurationFilePath);
+if (configString == null)
+    throw new ArgumentNullException("Missing configuration file");
+
 var config = JsonConvert.DeserializeObject<Configuration>(configString);
 
 ConsoleExtension.WriteLine("\u2714 Configuration resolved\n", ConsoleColor.Green);

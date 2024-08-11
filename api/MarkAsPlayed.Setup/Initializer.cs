@@ -1,6 +1,5 @@
 ﻿using LinqToDB.Data;
 using MarkAsPlayed.Foundation;
-using MarkAsPlayed.Foundation.Configuration;
 using Npgsql;
 using System.Text.Json;
 
