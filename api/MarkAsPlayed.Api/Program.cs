@@ -4,17 +4,22 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using MSLogging = Microsoft.Extensions.Logging;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.DependencyInjection;
+
+const string googleSecureUrl = "https://securetoken.google.com/";
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Config check
 // Config check
 
 var config = builder.Configuration.Get<Configuration>();
 if (config == null)
     throw new ArgumentNullException(nameof(config));
+#endregion
 
+#region Add services to the container
 // Add services to the container
 
 builder.Services.AddControllers();
@@ -52,27 +57,21 @@ builder.Services.
     AddJwtBearer(options =>
     {
         var projectId = config.Firebase.ProjectId;
-        options.Authority = "https://securetoken.google.com/" + projectId;
+        options.Authority = googleSecureUrl + projectId;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = "https://securetoken.google.com/" + projectId,
+            ValidIssuer = googleSecureUrl + projectId,
             ValidateAudience = true,
             ValidAudience = projectId,
             ValidateLifetime = true,
         };
     });
 
-var loggingConfiguration = builder.Configuration.GetSection("Logging");
-builder.Services.
-    AddLogging(builder =>
-    {
-        builder
-            .AddDebug()
-            .AddConsole()
-            .AddConfiguration(loggingConfiguration)
-            .SetMinimumLevel(MSLogging.LogLevel.Information);
-    });
+builder.Services.AddScoped<LoggerHelper>();
+#endregion
+
+// Build
 
 var app = builder.Build();
 

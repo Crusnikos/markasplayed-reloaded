@@ -1,5 +1,7 @@
 ﻿using DbUp;
 using DbUp.Engine;
+using MarkAsPlayed.Foundation;
+using Microsoft.Extensions.Logging;
 
 namespace MarkAsPlayed.Setup;
 
@@ -16,34 +18,29 @@ internal sealed class Migrator
             Build();
     }
 
-    public Task<List<string>> RunAsync(string connectionString, CancellationToken cancellationToken = default)
+    public Task<List<string>> RunAsync(string connectionString, ILogger logger, CancellationToken cancellationToken = default)
     {
         var engine = Deploy(connectionString);
 
         if (!engine.IsUpgradeRequired())
         {
-            ConsoleExtension.WriteLine("- Database upgrade is not required");
+            logger.LogInformation("Database upgrade is not required");
             return Task.FromResult(new List<string>());
         }
 
         var executedScripts = engine.GetScriptsToExecute().Select(s => s.Name).ToList();
-        ConsoleExtension.WriteLine($"- Number of scripts to execute: {engine.GetScriptsToExecute().Count}");
+        logger.LogInformation($"- Number of scripts to execute: {engine.GetScriptsToExecute().Count}");
 
         var operation = engine.PerformUpgrade();
 
         if (operation.Successful)
         {
-            ConsoleExtension.WriteLine("- Database successfully upgraded");
-
+            logger.LogInformation("- Database successfully upgraded");
             return Task.FromResult(executedScripts);
         }
         else
         {
-            ConsoleExtension.WriteLine("\u2716 Database could not be upgraded", ConsoleColor.Red);
-            ConsoleExtension.WriteLine("Error:");
-            ConsoleExtension.WriteLine(operation.Error.Message);
-            ConsoleExtension.WriteLine("\n");
-
+            logger.LogError(operation.Error, $"{LoggerHelper.RedColor}Database could not be upgraded{LoggerHelper.WhiteColor}");
             return Task.FromResult(executedScripts);
         }
     }
