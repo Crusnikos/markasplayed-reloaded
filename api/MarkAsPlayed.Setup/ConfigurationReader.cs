@@ -39,7 +39,7 @@ internal static class ConfigurationReader
         if (dbConnection == null)
         {
             message = "Missing database connection string";
-            logger.LogError($"{LoggerHelper.RedColor}{message}{LoggerHelper.WhiteColor}");
+            logger.LogError($"{LoggerConsoleProvider.RedColor}{message}{LoggerConsoleProvider.WhiteColor}");
             throw new ArgumentNullException(message);
         } 
 
@@ -48,7 +48,7 @@ internal static class ConfigurationReader
         if (administrationUsers == null || administrationUsers.Count == 0)
         {
             message = "Missing administration users data";
-            logger.LogError($"{LoggerHelper.RedColor}{message}{LoggerHelper.WhiteColor}");
+            logger.LogError($"{LoggerConsoleProvider.RedColor}{message}{LoggerConsoleProvider.WhiteColor}");
             throw new ArgumentNullException(message);
         }
 
@@ -56,7 +56,7 @@ internal static class ConfigurationReader
         if (config?.Firebase?.ProjectId == null)
         {
             message = "Missing firebase project id";
-            logger.LogError($"{LoggerHelper.RedColor}{message}{LoggerHelper.WhiteColor}");
+            logger.LogError($"{LoggerConsoleProvider.RedColor}{message}{LoggerConsoleProvider.WhiteColor}");
             throw new ArgumentNullException(message);
         }
     }

@@ -40,8 +40,9 @@ internal sealed class Migrator
         }
         else
         {
-            logger.LogError(operation.Error, $"{LoggerHelper.RedColor}Database could not be upgraded{LoggerHelper.WhiteColor}");
-            return Task.FromResult(executedScripts);
+            var message = "Database could not be upgraded";
+            logger.LogError(operation.Error, $"{LoggerConsoleProvider.RedColor}{message}{LoggerConsoleProvider.WhiteColor}");
+            throw new ApplicationException(message);
         }
     }
 }

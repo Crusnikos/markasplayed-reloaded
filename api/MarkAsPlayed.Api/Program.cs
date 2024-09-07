@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.FileProviders;
-using MarkAsPlayed.Foundation.Logger;
 
 const string googleSecureUrl = "https://securetoken.google.com/";
 
@@ -67,8 +66,6 @@ builder.Services.
             ValidateLifetime = true,
         };
     });
-
-builder.Services.AddScoped<LoggerHelper>();
 #endregion
 
 // Build

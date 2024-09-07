@@ -56,6 +56,32 @@ public class Logging
 {
     public LogLevel LogLevel { get; set; } = default!;
     public Console Console { get; set; } = default!;
+    public LoggerDatabase LoggerDatabase { get; set; } = default!;
+    public LoggerConsole LoggerConsole { get; set; } = default!;
+}
+
+public class LoggerDatabase
+{
+    public OptionsDatabase OptionsDatabase { get; set; } = default!;
+}
+
+public class LoggerConsole
+{
+    public OptionsConsole OptionsConsole { get; set; } = default!;
+}
+
+public class OptionsConsole
+{
+    public bool IncludeScopes { get; set; }
+    public bool SingleLine { get; set; }
+    public string TimestampFormat { get; set; } = default!;
+    public int ColorBehavior { get; set; }
+}
+
+public class OptionsDatabase
+{
+    public ICollection<string> LogFields { get; set; } = new List<string>();
+    public string LogTable { get; set; } = default!;
 }
 
 public class LogLevel

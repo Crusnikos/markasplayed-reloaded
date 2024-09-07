@@ -3,23 +3,23 @@ using MarkAsPlayed.Setup;
 using Microsoft.Extensions.Logging;
 
 //Starting setup
-ILogger logger = new LoggerHelper().CreateLogger("Setup");
+ILogger logger = new LoggerConsoleProvider(null!).CreateLogger("Setup");
 logger.LogInformation("Starting the setup");
 
 //Read configuration
 logger.LogInformation("Read configuration");
 var config = await ConfigurationReader.ReadConfigurationAsync(logger);
-logger.LogInformation($"{LoggerHelper.GreenColor}Configuration resolved{LoggerHelper.WhiteColor}");
+logger.LogInformation($"{LoggerConsoleProvider.GreenColor}Configuration resolved{LoggerConsoleProvider.WhiteColor}");
 
 //Validate configuration
 ConfigurationReader.ValidateConfiguration(logger, config);
-logger.LogInformation($"{LoggerHelper.GreenColor}Validating configuration data completed{LoggerHelper.WhiteColor}");
+logger.LogInformation($"{LoggerConsoleProvider.GreenColor}Validating configuration data completed{LoggerConsoleProvider.WhiteColor}");
 
 //Start migrations
 logger.LogInformation($"Start migrations");
 var migrator = new Migrator();
 var executedScripts = await migrator.RunAsync(config.ConnectionStrings.MainDatabase, logger);
-logger.LogInformation($"{LoggerHelper.GreenColor}Migrations completed{LoggerHelper.WhiteColor}");
+logger.LogInformation($"{LoggerConsoleProvider.GreenColor}Migrations completed{LoggerConsoleProvider.WhiteColor}");
 
 //Initialize basic data
 var initializer = new Initializer();
@@ -33,7 +33,7 @@ var initialsResult = await initializer.InsertInitialsAsync(config.ConnectionStri
 foreach (var result in initialsResult)
     logger.LogInformation($"- {result.Value} for {result.Key} inserted correctly");
 
-logger.LogInformation($"{LoggerHelper.GreenColor}Insert basic data completed{LoggerHelper.WhiteColor}");
+logger.LogInformation($"{LoggerConsoleProvider.GreenColor}Insert basic data completed{LoggerConsoleProvider.WhiteColor}");
 
 //Setup completed
-logger.LogInformation($"{LoggerHelper.GreenColor}Setup completed{LoggerHelper.WhiteColor}");
+logger.LogInformation($"{LoggerConsoleProvider.GreenColor}Setup completed{LoggerConsoleProvider.WhiteColor}");

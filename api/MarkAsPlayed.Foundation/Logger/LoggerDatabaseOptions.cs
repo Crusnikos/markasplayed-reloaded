@@ -2,13 +2,9 @@
 
 public class LoggerDatabaseOptions
 {
-    public string ConnectionString { get; init; }
+    public string ConnectionString { get; init; } = default!;
 
-    public string[] LogFields { get; init; }
+    public string[] LogFields { get; init; } = default!;
 
-    public string LogTable { get; init; }
-
-    public LoggerDatabaseOptions()
-    {
-    }
+    public string LogTable { get; init; } = default!;
 }
