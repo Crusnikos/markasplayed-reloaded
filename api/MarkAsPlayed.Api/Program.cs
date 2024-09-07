@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.DependencyInjection;
+using MarkAsPlayed.Foundation.Logger;
 
 const string googleSecureUrl = "https://securetoken.google.com/";
 

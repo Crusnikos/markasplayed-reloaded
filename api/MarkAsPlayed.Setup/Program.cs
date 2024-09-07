@@ -1,4 +1,4 @@
-﻿using MarkAsPlayed.Foundation;
+﻿using MarkAsPlayed.Foundation.Logger;
 using MarkAsPlayed.Setup;
 using Microsoft.Extensions.Logging;
 

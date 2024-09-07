@@ -1,6 +1,6 @@
 ﻿using DbUp;
 using DbUp.Engine;
-using MarkAsPlayed.Foundation;
+using MarkAsPlayed.Foundation.Logger;
 using Microsoft.Extensions.Logging;
 
 namespace MarkAsPlayed.Setup;

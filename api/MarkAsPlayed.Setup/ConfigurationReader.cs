@@ -1,4 +1,5 @@
 ﻿using MarkAsPlayed.Foundation;
+using MarkAsPlayed.Foundation.Logger;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 

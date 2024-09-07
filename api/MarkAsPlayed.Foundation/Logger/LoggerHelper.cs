@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 
-namespace MarkAsPlayed.Foundation;
+namespace MarkAsPlayed.Foundation.Logger;
 
 public sealed class LoggerHelper
 {
@@ -12,7 +12,8 @@ public sealed class LoggerHelper
 
     public ILogger CreateLogger(string categoryName)
     {
-        using ILoggerFactory factory = LoggerFactory.Create(builder => {
+        using ILoggerFactory factory = LoggerFactory.Create(builder =>
+        {
             builder.AddConsole();
             builder.AddSimpleConsole(options =>
             {
