@@ -18,5 +18,9 @@
   {
     "name": "other",
     "group_sign": "O"
+  },
+  {
+    "name": "commentary",
+    "group_sign": "C"
   }
 ]

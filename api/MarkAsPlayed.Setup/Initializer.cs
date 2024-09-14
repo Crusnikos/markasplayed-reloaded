@@ -70,7 +70,15 @@ internal sealed class Initializer
                     return result;
 
                 foreach (var initial in initials)
-                    await InsertInitialAsync(initial, dbConection, result);
+                {
+                    if (initial.EndsWith("field.json"))
+                    {
+                        await InsertInitialAsync<Field>(initial, dbConection, result);
+                        continue;
+                    } 
+
+                    await InsertInitialAsync<InitialRecord>(initial, dbConection, result);
+                }
             }
         }
         catch (Exception e)
@@ -81,7 +89,7 @@ internal sealed class Initializer
         return result;
     }
 
-    private async Task InsertInitialAsync(
+    private async Task InsertInitialAsync<T>(
         string initial, 
         Database dbConection,
         Dictionary<string, int> result,
@@ -94,22 +102,20 @@ internal sealed class Initializer
         if (fileText == null)
             throw new ArgumentNullException($"Missing text in {initial}");
 
-        var initialRecords = JsonSerializer.Deserialize<List<InitialRecord>>(fileText);
+        var data = JsonSerializer.Deserialize<List<T>>(fileText);
 
-        if (initialRecords == null || initialRecords.Count == 0)
-            result.Add(tableName, counter);
-
-        foreach (var record in initialRecords!.Distinct())
+        foreach (var record in data!.Distinct())
         {
             try
             {
-                await dbConection.ExecuteAsync(
-                        $"INSERT INTO {tableName} " +
-                        "(name, group_sign) " +
-                        "VALUES " +
-                        $"('{record.Name}', '{record.GroupSign}')",
-                        cancellationToken);
+                if (initial.EndsWith("field.json"))
+                {
+                    await InsertExecuteAsync((record as Field)!, dbConection, tableName);
+                    counter++;
+                    continue;
+                }
 
+                await InsertExecuteAsync((record as InitialRecord)!, dbConection, tableName);
                 counter++;
             }
             catch (PostgresException e)
@@ -124,5 +130,39 @@ internal sealed class Initializer
         }
 
         result.Add(tableName, counter);
+    }
+
+    private async Task InsertExecuteAsync(Field record, Database dbConection, string tableName, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await dbConection.ExecuteAsync(
+                        $"INSERT INTO {tableName} " +
+                        "(name, type, attributes, connections) " +
+                        "VALUES " +
+                        $"('{record.Name}', '{record.Type}', '{string.Join(";", record.Attributes)}', '{string.Join(";", record.Connections)}')",
+                        cancellationToken);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    private async Task InsertExecuteAsync(InitialRecord record, Database dbConection, string tableName, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await dbConection.ExecuteAsync(
+                        $"INSERT INTO {tableName} " +
+                        "(name, group_sign) " +
+                        "VALUES " +
+                        $"('{record.Name}', '{record.GroupSign}')",
+                        cancellationToken);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }

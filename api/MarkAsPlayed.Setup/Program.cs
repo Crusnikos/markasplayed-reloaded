@@ -27,11 +27,11 @@ var initializer = new Initializer();
 var usersInsertResult = await initializer.InsertAdministrationUsersAsync(
     config.AdministrationUsers, 
     config.ConnectionStrings.MainDatabase);
-logger.LogInformation($"- {usersInsertResult} users inserted correctly");
+logger.LogInformation($"- {usersInsertResult} user(s) inserted correctly");
 
 var initialsResult = await initializer.InsertInitialsAsync(config.ConnectionStrings.MainDatabase);
 foreach (var result in initialsResult)
-    logger.LogInformation($"- {result.Value} for {result.Key} inserted correctly");
+    logger.LogInformation($"- {result.Value} {result.Key}(s) inserted correctly");
 
 logger.LogInformation($"{LoggerConsoleProvider.GreenColor}Insert basic data completed{LoggerConsoleProvider.WhiteColor}");
 
