@@ -103,20 +103,29 @@ internal sealed class Initializer
             throw new ArgumentNullException($"Missing text in {initial}");
 
         var data = JsonSerializer.Deserialize<List<T>>(fileText);
+        if (data == null)
+            throw new FormatException($"Wrong data format in {initial}");
 
         foreach (var record in data!.Distinct())
         {
+            if (record == null)
+                continue;
+
             try
             {
-                if (initial.EndsWith("field.json"))
+                switch (true)
                 {
-                    await InsertExecuteAsync((record as Field)!, dbConection, tableName);
-                    counter++;
-                    continue;
+                    case true when typeof(Field).IsAssignableFrom(typeof(T)):
+                        await InsertExecuteAsync((record as Field)!, dbConection, tableName);
+                        counter++;
+                        continue;
+                    case true when typeof(InitialRecord).IsAssignableFrom(typeof(T)):
+                        await InsertExecuteAsync((record as InitialRecord)!, dbConection, tableName);
+                        counter++;
+                        continue;
+                    default:
+                        throw new NotImplementedException();
                 }
-
-                await InsertExecuteAsync((record as InitialRecord)!, dbConection, tableName);
-                counter++;
             }
             catch (PostgresException e)
             {

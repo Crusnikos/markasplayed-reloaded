@@ -52,39 +52,48 @@ public class LoggerDatabase : ILogger
             switch (logField)
             {
                 case "LogLevel":
-                    if (!string.IsNullOrWhiteSpace(logLevel.ToString()))
-                        values.Add("log_level", logLevel.ToString());
-                    break;
+                    values.Add("log_level", SafeToString(logLevel));
+                    continue;
                 case "ThreadId":
-                    values.Add("thread_id", Thread.CurrentThread.ManagedThreadId.ToString());
-                    break;
+                    values.Add("thread_id", SafeToString(Thread.CurrentThread.ManagedThreadId));
+                    continue;
                 case "EventId":
-                    values.Add("event_id", eventId.Id.ToString());
-                    break;
+                    values.Add("event_id", SafeToString(eventId.Id));
+                    continue;
                 case "EventName":
-                    if (!string.IsNullOrWhiteSpace(eventId.Name))
-                        values.Add("event_name", eventId.Name);
-                    break;
+                    values.Add("event_name", SafeToString(eventId.Name));
+                    continue;
                 case "Message":
-                    if (!string.IsNullOrWhiteSpace(formatter(state, exception)))
-                        values.Add("message", formatter(state, exception));
-                    break;
+                    values.Add("message", SafeToString(formatter(state, exception)));
+                    continue;
                 case "ExceptionMessage":
-                    if (!string.IsNullOrWhiteSpace(exception?.Message))
-                        values.Add("exception_message", exception?.Message!);
-                    break;
+                    values.Add("exception_message", SafeToString(exception?.Message));
+                    continue;
                 case "ExceptionStackTrace":
-                    if (!string.IsNullOrWhiteSpace(exception?.StackTrace))
-                        values.Add("exception_stack_trace", exception?.StackTrace!);
-                    break;
+                    values.Add("exception_stack_trace", SafeToString(exception?.StackTrace));
+                    continue;
                 case "ExceptionSource":
-                    if (!string.IsNullOrWhiteSpace(exception?.Source))
-                        values.Add("exception_source", exception?.Source!);
-                    break;
+                    values.Add("exception_source", SafeToString(exception?.Source));
+                    continue;
             }
         }
 
         return values;
+    }
+
+    private static string SafeToString(object? text)
+    {
+        try
+        {
+            if (text == null) 
+                return string.Empty;
+
+            return Convert.ToString(text)!;
+        }
+        catch (Exception)
+        {
+            return string.Empty;
+        }
     }
 
     private async Task InsertLogAsync(Database dbConection, Dictionary<string, string> log, CancellationToken cancellationToken = default)
@@ -92,7 +101,7 @@ public class LoggerDatabase : ILogger
         try
         {
             var keys = string.Join(", ", log.Select(l => l.Key));
-            var values = string.Join(", ", log.Select(l => $"'{l.Value}'"));
+            var values = string.Join(", ", log.Select(l => $"'{l.Value.Replace("\'","\"")}'"));
 
             await dbConection.ExecuteAsync(
                 $"INSERT INTO {_loggerDatabaseProvider.Options.LogTable} ({keys}) VALUES ({values})", 
