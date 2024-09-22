@@ -23,7 +23,8 @@ CREATE TABLE article (
     modified timestamptz not null DEFAULT NOW(),
     overwrite_creation_time timestamptz NOT NULL DEFAULT '-infinity',
     created_by_author_id INTEGER not null REFERENCES author (author_id),
-    properties JSONB not null
+    properties JSONB not null,
+    is_hidden boolean not null DEFAULT false 
 );
 
 CREATE TABLE article_content (
@@ -53,7 +54,8 @@ CREATE TABLE article_image (
     article_id BIGINT not null REFERENCES article (article_id) ON DELETE CASCADE,
     path TEXT not null,
     external_path TEXT not null,
-    is_active boolean not null DEFAULT true
+    is_active boolean not null DEFAULT true,
+    is_front_image boolean not null DEFAULT false
 );
 CREATE INDEX article_image_id_idx ON article_image (article_image_id);
 

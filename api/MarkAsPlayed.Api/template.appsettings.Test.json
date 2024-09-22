@@ -7,12 +7,12 @@
   },
   "Logging": {
     "LogLevel": {
-      "Default": "Information",
-      "System": "Information",
-      "Microsoft.AspNetCore": "Warning"
+      "Default": "None",
+      "System": "None",
+      "Microsoft.AspNetCore": "None"
     },
     "Console": {
-      "IncludeScopes": true
+      "IncludeScopes": false
     },
     "LoggerConsole": {
       "OptionsConsole": {

@@ -7,7 +7,7 @@ namespace MarkAsPlayed.Api.Tests;
 
 internal class TestConfiguration : IAsyncDisposable
 {
-    private readonly string _mainDbConnectionString; 
+    private readonly string _mainDbConnectionString;
     public IConfiguration Value { get; }
     public string DatabaseConnectionString { get; }
     public string DatabaseName { get; }
@@ -31,7 +31,7 @@ internal class TestConfiguration : IAsyncDisposable
 
     public static TestConfiguration Create()
     {
-        var configuration = new ConfigurationBuilder().Build();
+        var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.Test.json").Build();
         var mainDbConnectionString = configuration.GetConnectionString("MainDatabase");
         var rootPath = configuration["RootPath"];
 
@@ -56,32 +56,30 @@ internal class TestConfiguration : IAsyncDisposable
     {
         var mainDbName = ExtractDatabaseNameFromConnectionString(_mainDbConnectionString);
 
-        using (Database dbConection = new Database(_mainDbConnectionString))
-        {
-            await TrySQLAction(async () => {
-                if (!(await dbConection.ExecuteAsync<bool>(GenerateSqlCommand("CHECK IF DB EXIST", DatabaseName, mainDbName))))
-                    return;
+        await TrySQLAction(async () => {
+            await using var db = new Database(_mainDbConnectionString);
+            if (!(await db.ExecuteAsync<bool>(GenerateSqlCommand("CHECK IF DB EXIST", DatabaseName, mainDbName))))
+                return;
 
-                await dbConection.ExecuteAsync(GenerateSqlCommand("DROP", DatabaseName));
-            });
-        }
+            await db.ExecuteAsync(GenerateSqlCommand("DROP", DatabaseName));
+        });
     }
 
     public async Task SetUpTestDatabaseAsync()
     {
+        var migrator = new TestMigrator();
+        await migrator.RunAsync(_mainDbConnectionString);
         var mainDbName = ExtractDatabaseNameFromConnectionString(_mainDbConnectionString);
-        await new TestMigrator().RunAsync(_mainDbConnectionString);
 
-        using (Database dbConection = new Database(_mainDbConnectionString))
+        await TrySQLAction(async () =>
         {
-            await TrySQLAction(async () => {
-                await SeverOtherConnections(dbConection, mainDbName);
-                if (await dbConection.ExecuteAsync<bool>(GenerateSqlCommand("CHECK IF DB EXIST", DatabaseName, mainDbName)))
-                    return;
+            await using var db = new Database(_mainDbConnectionString);
+            await SeverOtherConnections(db, mainDbName);
+            if (await db.ExecuteAsync<bool>(GenerateSqlCommand("CHECK IF DB EXIST", DatabaseName, mainDbName)))
+                return;
 
-                await dbConection.ExecuteAsync(GenerateSqlCommand("CREATE", DatabaseName, mainDbName));
-            });
-        }
+            await db.ExecuteAsync(GenerateSqlCommand("CREATE", DatabaseName, mainDbName));
+        });
     }
 
     private async Task TrySQLAction<T>(Func<T> block)
@@ -93,6 +91,8 @@ internal class TestConfiguration : IAsyncDisposable
             try
             {
                 block();
+
+                return;
             }
             catch (PostgresException e)
             {

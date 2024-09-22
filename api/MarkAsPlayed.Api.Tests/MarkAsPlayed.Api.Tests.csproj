@@ -13,6 +13,7 @@
     <PackageReference Include="dbup-postgresql" Version="5.0.40" />
     <PackageReference Include="FluentAssertions" Version="6.12.1" />
     <PackageReference Include="Flurl.Http" Version="4.0.2" />
+    <PackageReference Include="Flurl.Http.Newtonsoft" Version="0.9.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -23,6 +24,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MarkAsPlayed.Foundation\MarkAsPlayed.Foundation.csproj" />
+	<ProjectReference Include="..\MarkAsPlayed.Api\MarkAsPlayed.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="../MarkAsPlayed.Setup/Migrations/*.sql" />
   </ItemGroup>
 
   <ItemGroup>

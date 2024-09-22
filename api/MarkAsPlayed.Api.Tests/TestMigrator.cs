@@ -16,27 +16,20 @@ internal sealed class TestMigrator
             Build();
     }
 
-    public Task<List<string>> RunAsync(string connectionString, CancellationToken cancellationToken = default)
+    public Task RunAsync(string connectionString, CancellationToken cancellationToken = default)
     {
+        if (connectionString == null)
+            throw new ArgumentNullException("Missing connection string");
+
         var engine = Deploy(connectionString);
 
         if (!engine.IsUpgradeRequired())
-        {
-            return Task.FromResult(new List<string>());
-        }
-
-        var executedScripts = engine.GetScriptsToExecute().Select(s => s.Name).ToList();
+            return Task.CompletedTask;
 
         var operation = engine.PerformUpgrade();
-
         if (operation.Successful)
-        {
-            return Task.FromResult(executedScripts);
-        }
+            return Task.CompletedTask;
         else
-        {
-            var message = "Database could not be upgraded";
-            throw new ApplicationException(message);
-        }
+            return Task.CompletedTask;
     }
 }
