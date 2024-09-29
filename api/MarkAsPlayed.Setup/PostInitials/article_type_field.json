@@ -1,0 +1,38 @@
+[
+  {
+    "field": "game_name",
+    "article_types": [ "review", "news", "story", "played", "other", "commentary" ]
+  },
+  {
+    "field": "played_on",
+    "article_types": [ "review", "news", "played" ]
+  },
+  {
+    "field": "lead_producer",
+    "article_types": [ "review", "news", "played" ]
+  },
+  {
+    "field": "lead_publisher",
+    "article_types": [ "review", "news", "played" ]
+  },
+  {
+    "field": "play_time",
+    "article_types": [ "review", "played" ]
+  },
+  {
+    "field": "is_first_attempt",
+    "article_types": [ "review", "played" ]
+  },
+  {
+    "field": "is_finished",
+    "article_types": [ "review", "played" ]
+  },
+  {
+    "field": "similar_to",
+    "article_types": [ "review", "news", "story", "played", "other", "commentary" ]
+  },
+  {
+    "field": "premiere",
+    "article_types": [ "review", "news", "played" ]
+  }
+]

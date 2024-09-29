@@ -8,6 +8,7 @@ namespace MarkAsPlayed.Setup;
 internal sealed class Initializer
 {
     const string initialsPath = "/MarkAsPlayed.Setup/Initials";
+    const string postInitialsPath = "/MarkAsPlayed.Setup/PostInitials";
 
     public async Task<int> InsertAdministrationUsersAsync(
         ICollection<AdministrationUsers> administrationUsers,
@@ -79,6 +80,16 @@ internal sealed class Initializer
 
                     await InsertInitialAsync<InitialRecord>(initial, dbConection, result);
                 }
+
+                var postInitials = Directory.GetFiles($"{currentDirectory}{postInitialsPath}");
+
+                foreach (var initial in postInitials)
+                {
+                    if (initial.EndsWith("article_type_field.json"))
+                    {
+                        await InsertInitialAsync<ArticleTypeField>(initial, dbConection, result);
+                    }
+                }
             }
         }
         catch (Exception e)
@@ -123,6 +134,9 @@ internal sealed class Initializer
                         await InsertExecuteAsync((record as InitialRecord)!, dbConection, tableName);
                         counter++;
                         continue;
+                    case true when typeof(ArticleTypeField).IsAssignableFrom(typeof(T)):
+                        counter += await InsertExecuteAsync((record as ArticleTypeField)!, dbConection, tableName);
+                        continue;
                     default:
                         throw new NotImplementedException();
                 }
@@ -147,9 +161,9 @@ internal sealed class Initializer
         {
             await dbConection.ExecuteAsync(
                         $"INSERT INTO {tableName} " +
-                        "(name, type, attributes, connections) " +
+                        "(name, type, attributes) " +
                         "VALUES " +
-                        $"('{record.Name}', '{record.Type}', '{string.Join(";", record.Attributes)}', '{string.Join(";", record.Connections)}')",
+                        $"('{record.Name}', '{record.Type}', '{string.Join(";", record.Attributes)}')",
                         cancellationToken);
         }
         catch (Exception)
@@ -173,5 +187,41 @@ internal sealed class Initializer
         {
             throw;
         }
+    }
+
+    private async Task<int> InsertExecuteAsync(ArticleTypeField record, Database dbConection, string tableName, CancellationToken cancellationToken = default)
+    {
+        var counter = 0;
+
+        foreach (var articleType in record.ArticleTypes)
+        {
+            try
+            {
+                if (articleType == null)
+                    continue;
+
+                await dbConection.ExecuteAsync(
+                    $"with summary as " +
+                    $"(SELECT x.article_type_id, y.field_id FROM " +
+                    $"(SELECT * from article_type WHERE name = '{articleType}' LIMIT 1) as x" +
+                    $", (SELECT * FROM field WHERE name = '{record.Field}' LIMIT 1) as y) " +
+                    $"INSERT INTO {tableName} (article_type_id, field_id) " +
+                    "SELECT article_type_id, field_id FROM summary",
+                    cancellationToken);
+
+                counter++;
+            }
+            catch (PostgresException e)
+            {
+                if (e.SqlState == PostgresErrorCodes.UniqueViolation)
+                    continue;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        return counter;
     }
 }

@@ -2,55 +2,46 @@
   {
     "name": "game_name",
     "type": "text",
-    "attributes": [ "minLength1", "maxLength50" ],
-    "connections": [ "review", "news", "story", "played", "other", "commentary" ]
+    "attributes": [ "minLength1", "maxLength50" ]
   },
   {
     "name": "played_on",
     "type": "number",
-    "attributes": [ "minValue1" ],
-    "connections": [ "review", "news", "played" ]
+    "attributes": [ "minValue1" ]
   },
   {
     "name": "lead_producer",
     "type": "text",
-    "attributes": [ "minLength1", "maxLength50" ],
-    "connections": [ "review", "news", "played" ]
+    "attributes": [ "minLength1", "maxLength50" ]
   },
   {
     "name": "lead_publisher",
     "type": "text",
-    "attributes": [ "minLength1", "maxLength50" ],
-    "connections": [ "review", "news", "played" ]
+    "attributes": [ "minLength1", "maxLength50" ]
   },
   {
     "name": "play_time",
     "type": "number",
-    "attributes": [ "minValue1", "maxValue10000", "required" ],
-    "connections": [ "review", "played" ]
+    "attributes": [ "minValue1", "maxValue10000", "required" ]
   },
   {
     "name": "is_first_attempt",
     "type": "boolean",
-    "attributes": [ "required" ],
-    "connections": [ "review", "played" ]
+    "attributes": [ "required" ]
   },
   {
     "name": "is_finished",
     "type": "boolean",
-    "attributes": [ "required" ],
-    "connections": [ "review", "played" ]
+    "attributes": [ "required" ]
   },
   {
     "name": "similar_to",
     "type": "number",
-    "attributes": [ "minValue1" ],
-    "connections": [ "review", "news", "story", "played", "other", "commentary" ]
+    "attributes": [ "minValue1" ]
   },
   {
     "name": "premiere",
     "type": "date_time",
-    "attributes": [],
-    "connections": [ "review", "news", "played" ]
+    "attributes": []
   }
 ]

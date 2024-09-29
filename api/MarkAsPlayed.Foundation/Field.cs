@@ -12,7 +12,4 @@ public class Field
 
     [JsonPropertyName("attributes")]
     public string[] Attributes { get; set; } = default!;
-
-    [JsonPropertyName("connections")]
-    public string[] Connections { get; set; } = default!;
 }

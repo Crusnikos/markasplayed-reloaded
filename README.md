@@ -14,6 +14,7 @@ Old repository is here https://github.com/Crusnikos/markasplayed
 
 - [General info](#general-info)
 - [Technologies](#technologies)
+- [Database diagram](#database-diagram)
 - [Setup](#setup)
 - [API Tests Setup](#api-tests-setup)
 
@@ -28,6 +29,10 @@ Old repository is here https://github.com/Crusnikos/markasplayed
 - React 18.3.1 / TypeScript 4.9.5
 - Docker ^4.31.1
 - Authentication supported by Firebase Authentication backend.
+
+## Database diagram
+
+![Database diagram](database-diagram.drawio.svg)
 
 ## Setup
 
